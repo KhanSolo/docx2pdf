@@ -2,7 +2,7 @@ mod parser;
 mod pdf_gen;
 
 use clap::Parser as ClapParser;
-use anyhow::Result;
+use anyhow::{Ok, Result};
 
 #[derive(ClapParser)]
 #[command(author, version, about)]
@@ -13,6 +13,16 @@ struct Args {
     output:String, //output file
 }
 
-fn main() {
-    println!("Hello, world!");
+fn main() -> Result<()>{
+    let args = Args::parse();
+
+    println!("Reading .docx {}", args.input);
+    let text : String = parser::extract_text_from_docx(&args.input)?;
+    println!("Extracted {} chars", text.len());
+
+    println!("Generating PDF: {}", args.output);
+    pdf_gen::generate_pdf(&text, args.output)?;
+
+    println!("Successfully completed!");
+    Ok(())
 }
