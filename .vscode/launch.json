@@ -1,0 +1,48 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [    
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'docx2pdf'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=docx2pdf",
+                    "--package=docx2pdf"
+                ],
+                "filter": {
+                    "name": "docx2pdf",
+                    "kind": "bin"
+                }
+            },
+            "args": [
+                "--input", "lorem.docx",
+                "--output", "lorem.pdf"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'docx2pdf'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=docx2pdf",
+                    "--package=docx2pdf"
+                ],
+                "filter": {
+                    "name": "docx2pdf",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
